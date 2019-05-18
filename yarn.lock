@@ -2536,6 +2536,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.npm.taobao.org/classnames/download/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=
+
 clean-css@4.2.x:
   version "4.2.1"
   resolved "https://registry.npm.taobao.org/clean-css/download/clean-css-4.2.1.tgz#2d411ef76b8569b6d0c84068dabe85b0aa5e5c17"
@@ -6255,6 +6260,13 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+material-ui-flat-pagination@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npm.taobao.org/material-ui-flat-pagination/download/material-ui-flat-pagination-3.2.0.tgz#4db75c70ef740dc0621452d39d1e1469d15527ea"
+  integrity sha1-TbdccO90DcBiFFLTnR4UadFVJ+o=
+  dependencies:
+    classnames "^2.2.6"
 
 md5.js@^1.3.4:
   version "1.3.5"

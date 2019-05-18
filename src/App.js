@@ -16,12 +16,14 @@ function AppRouter() {
       <CssBaseline />
       <Navigation />
       <Container fixed>
-        <Typography component={Switch}>
-          <Route path="/" exact component={Project} />
-          <Route path="/project" component={Project} />
-          <Route path="/company" component={Company} />
-          <Route path="/university" component={University} />
-          <Route path="/enterprise" component={Enterprise} />
+        <Typography component="div" style={{margin: "30px"}}>
+          <Switch>
+            <Route path="/" exact component={Project} />
+            <Route path="/project" component={Project} />
+            <Route path="/company" component={Company} />
+            <Route path="/university" component={University} />
+            <Route path="/enterprise" component={Enterprise} />
+          </Switch>
         </Typography>
       </Container>
     </Router>
