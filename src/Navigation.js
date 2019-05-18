@@ -22,8 +22,42 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Navigation() {
+function Normal() {
   const classes = useStyles();
+
+  return (
+    <>
+      <Button color="inherit" component={Link} to="/project" className={classes.menuButton}>
+        PROJECT
+      </Button>
+      <Button color="inherit" component={Link} to="/company" className={classes.menuButton}>
+        COMPANY
+      </Button>
+      <Button color="inherit" component={Link} to="/university">
+        UNIVERSITY
+      </Button>
+    </>
+  );
+}
+
+function Enterprise() {
+  const classes = useStyles();
+
+  return (
+    <>
+      <Button color="inherit" component={Link} to="/enterprise" className={classes.menuButton}>
+        Release Project
+      </Button>
+      <Button color="inherit" component={Link} to="/enterprise">
+        ALL PROJECTS
+      </Button>
+    </>
+  );
+}
+
+function Navigation(props) {
+  const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -39,17 +73,9 @@ function Navigation() {
             >
               <MenuIcon />
             </IconButton>
-            <Button color="inherit" component={Link} to="/project" className={classes.menuButton}>
-              PROJECT
-            </Button>
-            <Button color="inherit" component={Link} to="/company" className={classes.menuButton}>
-              COMPANY
-            </Button>
-            <Button color="inherit" component={Link} to="/university">
-              UNIVERSITY
-            </Button>
+            {props.enterprise ? <Enterprise /> : <Normal />}
           </Box>
-          <AuthInfo />
+          {props.enterprise ? null : <AuthInfo />}
           <Button variant="outlined" color="inherit" component={Link} to="/enterprise">
             Enterprise
           </Button>

@@ -14,18 +14,28 @@ import PassportRouter from "./passport/PassportRouter";
 
 function PublicRouter() {
   return (
-    <Container fixed style={{ margin: "30px auto" }}>
-      <Route path="/" exact component={Project} />
-      <Route path="/project" component={Project} />
-      <Route path="/company" component={Company} />
-      <Route path="/university" component={University} />
-      <Route path="/enterprise" component={Enterprise} />
-    </Container>
+    <>
+      <Container fixed style={{ margin: "30px auto" }}>
+        <Route path="/" exact component={Project} />
+        <Route path="/project" component={Project} />
+        <Route path="/company" component={Company} />
+        <Route path="/university" component={University} />
+        <Route path="/enterprise" component={Enterprise} />
+      </Container>
+    </>
   );
 }
 
 const PageRouter = withRouter(props => {
-  return props.location.pathname.startsWith("/passport") ? <PassportRouter /> : <PublicRouter />;
+  const passport = props.location.pathname.startsWith("/passport");
+  const enterprise = props.location.pathname.startsWith("/enterprise");
+
+  return (
+    <>
+      <Navigation enterprise={enterprise} />
+      {passport ? <PassportRouter /> : <PublicRouter />}
+    </>
+  );
 });
 
 function App() {
@@ -39,7 +49,6 @@ function App() {
     >
       <Router>
         <CssBaseline />
-        <Navigation />
         <PageRouter />
       </Router>
     </SnackbarProvider>
