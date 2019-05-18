@@ -12,11 +12,11 @@ import Pagination from "material-ui-flat-pagination";
 
 const data = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 59; i++) {
   data.push({
     id: i,
     name: "e-commerce website of medicine " + i,
-    avatar: "",
+    avatar: "/images/company.png",
     description: "This is a brief description of the project, no more than one lines.",
     period: i + 1
   });
