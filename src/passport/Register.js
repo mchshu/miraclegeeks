@@ -81,7 +81,7 @@ function Register(props) {
             required
           />
           <TextField
-            error={password1 && password2 && password1 !== password2}
+            error={!!password1 && !!password2 && password1 !== password2}
             label="Confirm Password"
             className={classes.textField}
             placeholder="Confirm Password"
