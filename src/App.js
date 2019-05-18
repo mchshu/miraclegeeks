@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
 
-function App() {
+import Navigation from "./Navigation";
+import Project from "./Project";
+import Company from "./Company";
+import Enterprise from "./Enterprise";
+import University from "./University";
+
+function AppRouter() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <CssBaseline />
+      <Navigation />
+      <Container fixed>
+        <Typography component={Switch}>
+          <Route path="/" exact component={Project} />
+          <Route path="/project" component={Project} />
+          <Route path="/company" component={Company} />
+          <Route path="/university" component={University} />
+          <Route path="/enterprise" component={Enterprise} />
+        </Typography>
+      </Container>
+    </Router>
   );
 }
 
-export default App;
+export default AppRouter;

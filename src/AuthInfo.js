@@ -1,0 +1,10 @@
+import React from 'react';
+import Button from '@material-ui/core/Button';
+
+export default function AuthInfo() {
+    return <div>
+        <Button color="inherit">Login</Button>
+        <span>|</span>
+        <Button color="inherit">Register</Button>
+    </div>
+}
