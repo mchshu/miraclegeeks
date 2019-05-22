@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, TextField, Fab } from "@material-ui/core";
+import Axios from "axios";
+import { withSnackbar } from "notistack";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -17,20 +19,33 @@ const useStyles = makeStyles(theme => ({
   },
   login: {
     marginTop: 30,
-    background: "#EDBB18",
+    background: "#EDBB18"
   },
   menu: {
     width: 200
   }
 }));
 
-export default function Login() {
+function Login(props) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login = e => {
+  const login = async e => {
     e.preventDefault();
-    console.log(email, password);
+    try {
+      const response = Axios.post("/api/login", {
+        email,
+        password
+      });
+      if (response.errcode > 0) {
+        localStorage.setItem("username", response.username);
+        props.history.push("/project");
+      } else {
+        props.enqueueSnackbar("username or password is invalid!", { variant: "error" });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -41,7 +56,7 @@ export default function Login() {
         </Typography>
       </Grid>
       <Grid item style={{ alignSelf: "flex-end" }}>
-        <Button component={Link} to= "/passport/register" variant="contained" color="primary" size="small">
+        <Button component={Link} to="/passport/register" variant="contained" color="primary" size="small">
           Register
         </Button>
       </Grid>
@@ -76,10 +91,12 @@ export default function Login() {
             className={classes.login}
             type="submit"
           >
-            <span style={{margin: "0 30px"}}>Login</span>
+            <span style={{ margin: "0 30px" }}>Login</span>
           </Fab>
         </form>
       </Grid>
     </Grid>
   );
 }
+
+export default withRouter(withSnackbar(Login));

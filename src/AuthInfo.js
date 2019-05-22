@@ -27,10 +27,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function AuthInfo() {
   const classes = useStyles();
-  const username = localStorage.getItem("username");
 
-  if (!username) {
-    return <Profile />
+  const [username, setUsername] = React.useState(() => {
+    return localStorage.getItem("username");
+  });
+
+  const logout = () => {
+    localStorage.removeItem("username");
+    setUsername("");
+  }
+
+  if (username) {
+    return <Profile logout={logout}/>
   }
 
   return (

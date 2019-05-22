@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, TextField, Fab } from "@material-ui/core";
 import { withSnackbar } from "notistack";
+import { Axios } from "axios";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -31,11 +32,25 @@ function Register(props) {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const register = e => {
+  const register = async e => {
     e.preventDefault();
     if (password1 !== password2) {
       props.enqueueSnackbar("Inconsistent password", { variant: "error" });
       return;
+    }
+    try {
+      const response = Axios.post("/api/register", {
+        name,
+        email,
+        password: password1
+      });
+      if (response.errcode > 0) {
+        props.enqueueSnackbar(response.errmsg, { variant: "error" });
+      } else {
+        props.history.push("/login");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
