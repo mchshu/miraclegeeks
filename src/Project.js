@@ -1,45 +1,50 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, List, ListItem } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Fab from "@material-ui/core/Fab";
-import { Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import UpdateIcon from "@material-ui/icons/Update";
-import Pagination from "material-ui-flat-pagination";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, List, ListItem } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
+import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import UpdateIcon from '@material-ui/icons/Update';
+import Pagination from 'material-ui-flat-pagination';
 
 const data = [];
 
 for (let i = 0; i < 59; i++) {
   data.push({
     id: i,
-    name: "e-commerce website of medicine " + i,
-    avatar: "/images/company.png",
-    description: "This is a brief description of the project, no more than one lines.",
+    name: 'e-commerce website of medicine ' + i,
+    avatar: `/images/bitmap${i % 6}.png`,
+    description: 'This is a brief description of the project, no more than one lines.',
     period: i + 1
   });
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
+    width: '100%',
     backgroundColor: theme.palette.background.paper
   },
+  item: {
+    '&:hover': {
+      boxShadow: '0px 0px 14px 0px rgba(198,215,234,1)'
+    }
+  },
   bigAvatar: {
-    margin: "0 20px",
+    margin: '0 20px',
     width: 90,
     height: 90
   },
   intro: {
-    display: "flex"
+    display: 'flex'
   },
   detail: {
-    color: "#FFFFFF",
-    background: "#6D6D6D",
-    "&:hover": {
-      background: "#EDBB18"
+    color: '#FFFFFF',
+    background: '#6D6D6D',
+    '&:hover': {
+      background: '#EDBB18'
     }
   }
 }));
@@ -56,7 +61,7 @@ function Project() {
         {projects.map(project => {
           return (
             <React.Fragment key={project.id}>
-              <ListItem alignItems="flex-start">
+              <ListItem alignItems="flex-start" className={classes.item}>
                 <ListItemAvatar>
                   <Avatar alt={project.name} src={project.avatar} className={classes.bigAvatar} />
                 </ListItemAvatar>
@@ -69,8 +74,8 @@ function Project() {
                       {project.description}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" style={{ marginTop: 20 }}>
-                      <UpdateIcon fontSize="small" style={{ verticalAlign: "bottom" }} /> period:{" "}
-                      <span style={{ color: "green" }}>{project.period} days</span>
+                      <UpdateIcon fontSize="small" style={{ verticalAlign: 'bottom' }} /> period:{' '}
+                      <span style={{ color: 'green' }}>{project.period} days</span>
                     </Typography>
                   </Grid>
                   <Grid item>
@@ -81,8 +86,7 @@ function Project() {
                       aria-label="View"
                       component={Link}
                       to="/enterprise/detail"
-                      className={classes.detail}
-                    >
+                      className={classes.detail}>
                       View Details
                     </Fab>
                   </Grid>
@@ -98,7 +102,7 @@ function Project() {
         offset={offset}
         total={data.length}
         onClick={(e, offset) => setOffset(offset)}
-        style={{ textAlign: "center" }}
+        style={{ textAlign: 'center' }}
       />
     </>
   );

@@ -16,7 +16,7 @@ for (let i = 0; i < 59; i++) {
   data.push({
     id: i,
     name: "e-commerce website of medicine " + i,
-    avatar: "/images/company.png",
+    avatar: `/images/bitmap${i % 6}.png`,
     description: "This is a brief description of the project, no more than one lines.",
     period: i + 1
   });

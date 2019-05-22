@@ -1,21 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { withRouter } from "react-router";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { SnackbarProvider } from "notistack";
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { SnackbarProvider } from 'notistack';
 
-import Navigation from "./Navigation";
-import Project from "./Project";
-import Company from "./Company";
-import Enterprise from "./Enterprise";
-import University from "./University";
-import PassportRouter from "./passport/PassportRouter";
+import Navigation from './Navigation';
+import Project from './Project';
+import Company from './Company';
+import Enterprise from './Enterprise';
+import University from './University';
+import PassportRouter from './passport/PassportRouter';
+import Footer from './Footer';
 
-function PublicRouter() {
+function PublicRouter(props) {
+  const banner = props.enterprise ? '/images/banner_company.png' : '/images/banner.png';
+
   return (
     <>
-      <Container fixed style={{ margin: "30px auto" }}>
+      <Container fixed>
+        <img src={banner} alt="banner" width="100%" />
         <Route path="/" exact component={Project} />
         <Route path="/project" component={Project} />
         <Route path="/company" component={Company} />
@@ -27,13 +31,14 @@ function PublicRouter() {
 }
 
 const PageRouter = withRouter(props => {
-  const passport = props.location.pathname.startsWith("/passport");
-  const enterprise = props.location.pathname.startsWith("/enterprise");
-
+  const passport = props.location.pathname.startsWith('/passport');
+  const enterprise = props.location.pathname.startsWith('/enterprise');
+  //logo.png
   return (
     <>
       <Navigation enterprise={enterprise} />
-      {passport ? <PassportRouter /> : <PublicRouter />}
+      {passport ? <PassportRouter /> : <PublicRouter enterprise={enterprise} />}
+      {!passport && <Footer />}
     </>
   );
 });
@@ -43,10 +48,9 @@ function App() {
     <SnackbarProvider
       maxSnack={3}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "center"
-      }}
-    >
+        vertical: 'top',
+        horizontal: 'center'
+      }}>
       <Router>
         <CssBaseline />
         <PageRouter />

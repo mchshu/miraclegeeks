@@ -1,30 +1,47 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Profile from './Profile';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: "0 20px",
-    backgroundColor: "#323B54",
-    borderRadius: "14px",
-    paddingLeft: "10px",
-    paddingRight: "10px"
+    margin: '0 30px',
+    backgroundColor: '#323B54',
+    borderRadius: '14px',
+    padding: '0 10px',
+  },
+  menuButton: {
+    lineHeight: '24px',
+    fontSize: '12px',
+    color: '#C1C6D4',
+    padding: '0 7px',
+    textDecoration: 'none'
+  },
+  divider: {
+    color: '#0A1433',
+    width: 1,
+    height: 10
   }
 }));
 
+
 export default function AuthInfo() {
   const classes = useStyles();
+  const username = localStorage.getItem("username");
+
+  if (!username) {
+    return <Profile />
+  }
 
   return (
     <div className={classes.root}>
-      <Button component={Link} to="/passport/login" color="inherit">
+      <Link to='/passport/login' className={classes.menuButton}>
         Login
-      </Button>
-      <span>|</span>
-      <Button component={Link} to="/passport/register" color="inherit">
+      </Link>
+      <span className={classes.divider}>|</span>
+      <Link to='/passport/register' className={classes.menuButton}>
         Register
-      </Button>
+      </Link>
     </div>
   );
 }

@@ -1,24 +1,42 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import { Link } from 'react-router-dom';
 
-import AuthInfo from "./AuthInfo";
-import { Box } from "@material-ui/core";
+import AuthInfo from './AuthInfo';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: '#0A1433'
   },
-  menu: {
-    flexGrow: 1
+
+  nav: {
+    height: 50
   },
+
+  left: {
+    height: '100%'
+  },
+
+  right: {
+    height: '100%'
+  },
+
   menuButton: {
-    marginRight: theme.spacing(2)
+    color: '#ffffff',
+    borderRadius: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    marginLeft: 100,
+    '&:hover': {
+      borderBottom: '#4988F9 3px solid'
+    }
+  },
+  enterprise: {
+    marginBottom: -5
   }
 }));
 
@@ -33,7 +51,7 @@ function Normal() {
       <Button color="inherit" component={Link} to="/company" className={classes.menuButton}>
         COMPANY
       </Button>
-      <Button color="inherit" component={Link} to="/university">
+      <Button color="inherit" component={Link} to="/university" className={classes.menuButton}>
         UNIVERSITY
       </Button>
     </>
@@ -48,7 +66,7 @@ function Enterprise() {
       <Button color="inherit" component={Link} to="/enterprise" className={classes.menuButton}>
         Release Project
       </Button>
-      <Button color="inherit" component={Link} to="/enterprise">
+      <Button color="inherit" component={Link} to="/enterprise" className={classes.menuButton}>
         ALL PROJECTS
       </Button>
     </>
@@ -60,27 +78,22 @@ function Navigation(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Box className={classes.menu}>
-            <IconButton
-              edge="start"
-              component={Link}
-              to="/"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            {props.enterprise ? <Enterprise /> : <Normal />}
-          </Box>
-          {props.enterprise ? null : <AuthInfo />}
-          <Button variant="outlined" color="inherit" component={Link} to="/enterprise">
-            Enterprise
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <Grid container className={classes.nav} alignItems="center" component={Container}>
+        <Grid item container xs alignItems="center" className={classes.left}>
+          <Grid item component={Link} to="/project">
+            <img src="/images/logo.png" height={22} alt="logo" />
+          </Grid>
+          <Grid item>{props.enterprise ? <Enterprise />: <Normal /> }</Grid>
+        </Grid>
+        <Grid item container xs alignItems="center" direction="row-reverse" className={classes.right}>
+          <Grid item component={Link} to="/enterprise" height={20} className={classes.enterprise}>
+            <img src="/images/enterprise.svg" height="100%" alt="enterprise" />
+          </Grid>
+          <Grid item>
+            <AuthInfo />
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 }

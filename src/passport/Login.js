@@ -46,6 +46,9 @@ export default function Login() {
         </Button>
       </Grid>
       <Grid item>
+        <img src="/images/emoji.png" width={38} alt="login" />
+      </Grid>
+      <Grid item>
         <form className={classes.container} onSubmit={login}>
           <TextField
             label="Email Address"
