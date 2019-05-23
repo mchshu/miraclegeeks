@@ -40,7 +40,9 @@ const StyledMenuItem = withStyles(theme => ({
 
 const useStyles = makeStyles(theme => ({
   avatar: {
-    marginRight: 30
+    marginRight: 30,
+    width: 30,
+    height: 30
   },
   itemIcon: {
     minWidth: 30
