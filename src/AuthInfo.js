@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     margin: '0 30px',
     backgroundColor: '#323B54',
     borderRadius: '14px',
-    padding: '0 10px',
+    padding: '0 10px'
   },
   menuButton: {
     lineHeight: '24px',
@@ -24,30 +24,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-export default function AuthInfo() {
+export default function AuthInfo(props) {
   const classes = useStyles();
-
-  const [username, setUsername] = React.useState(() => {
-    return localStorage.getItem("username");
-  });
-
+  const { username, setUsername } = props;
   const logout = () => {
-    localStorage.removeItem("username");
-    setUsername("");
+    setUsername('');
   }
 
   if (username) {
-    return <Profile logout={logout}/>
+    return <Profile logout={logout} />;
   }
 
   return (
     <div className={classes.root}>
-      <Link to='/passport/login' className={classes.menuButton}>
+      <Link to="/passport/login" className={classes.menuButton}>
         Login
       </Link>
       <span className={classes.divider}>|</span>
-      <Link to='/passport/register' className={classes.menuButton}>
+      <Link to="/passport/register" className={classes.menuButton}>
         Register
       </Link>
     </div>

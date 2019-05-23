@@ -75,6 +75,7 @@ function Enterprise() {
 
 function Navigation(props) {
   const classes = useStyles();
+  const { username, setUsername } = props;
 
   return (
     <div className={classes.root}>
@@ -83,14 +84,14 @@ function Navigation(props) {
           <Grid item component={Link} to="/project">
             <img src="/images/logo.png" height={22} alt="logo" />
           </Grid>
-          <Grid item>{props.enterprise ? <Enterprise />: <Normal /> }</Grid>
+          <Grid item>{props.enterprise ? <Enterprise /> : <Normal />}</Grid>
         </Grid>
         <Grid item container xs alignItems="center" direction="row-reverse" className={classes.right}>
           <Grid item component={Link} to="/enterprise" height={20} className={classes.enterprise}>
             <img src="/images/enterprise.svg" height="100%" alt="enterprise" />
           </Grid>
           <Grid item>
-            <AuthInfo />
+            <AuthInfo username={username} setUsername={setUsername} />
           </Grid>
         </Grid>
       </Grid>

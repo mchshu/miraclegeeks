@@ -9,18 +9,8 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import UpdateIcon from "@material-ui/icons/Update";
 import Pagination from "material-ui-flat-pagination";
-
-const data = [];
-
-for (let i = 0; i < 59; i++) {
-  data.push({
-    id: i,
-    name: "e-commerce website of medicine " + i,
-    avatar: `/images/bitmap${i % 6}.png`,
-    description: "This is a brief description of the project, no more than one lines.",
-    period: i + 1
-  });
-}
+import Axios from 'axios';
+import { withSnackbar } from 'notistack';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,16 +34,35 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Enterprise() {
+function Enterprise(props) {
   const classes = useStyles();
+  const { enqueueSnackbar } = props;
   const limit = 10;
   const [offset, setOffset] = useState(0);
-  const enterprises = data.slice(offset, offset + limit);
+  const [response, setResponse] = useState({ total: 0, projects: [] });
+
+  React.useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await Axios.post('/api/publicProjects', { page: offset / limit + 1, perPage: limit });
+        const data = response.data;
+        if (data.errcode && data.errcode > 0) {
+          enqueueSnackbar(data.errmsg, { variant: 'error' });
+        } else {
+          setResponse(data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchData();
+  }, [offset, enqueueSnackbar]);
+  const projects = response.projects || [];
 
   return (
     <>
       <List className={classes.root}>
-        {enterprises.map(project => {
+        {projects.map(project => {
           return (
             <React.Fragment key={project.id}>
               <ListItem alignItems="flex-start">
@@ -96,7 +105,7 @@ function Enterprise() {
       <Pagination
         limit={limit}
         offset={offset}
-        total={data.length}
+        total={response.total}
         onClick={(e, offset) => setOffset(offset)}
         style={{ textAlign: "center" }}
       />
@@ -104,4 +113,4 @@ function Enterprise() {
   );
 }
 
-export default Enterprise;
+export default withSnackbar(Enterprise);

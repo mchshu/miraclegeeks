@@ -33,11 +33,25 @@ function PublicRouter(props) {
 const PageRouter = withRouter(props => {
   const passport = props.location.pathname.startsWith('/passport');
   const enterprise = props.location.pathname.startsWith('/enterprise');
+  const [username, setUsername] = React.useState(() => {
+    return localStorage.getItem("username");
+  });
+
+  const updateUsername = username => {
+    if (username) {
+      localStorage.setItem("username", username)
+    } else {
+      localStorage.removeItem("username");
+
+    }
+    setUsername(username);
+  }
+
   //logo.png
   return (
     <>
-      <Navigation enterprise={enterprise} />
-      {passport ? <PassportRouter /> : <PublicRouter enterprise={enterprise} />}
+      <Navigation enterprise={enterprise} username={username} setUsername={updateUsername} />
+      {passport ? <PassportRouter setUsername={updateUsername} /> : <PublicRouter enterprise={enterprise} />}
       {!passport && <Footer />}
     </>
   );

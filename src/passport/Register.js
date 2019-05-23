@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button, TextField, Fab } from "@material-ui/core";
-import { withSnackbar } from "notistack";
-import { Axios } from "axios";
+import React, { useState } from 'react';
+import { Link, withRouter} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Button, TextField, Fab } from '@material-ui/core';
+import { withSnackbar } from 'notistack';
+import Axios from 'axios';
 
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
 const useStyles = makeStyles(theme => ({
   container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -19,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   login: {
     marginTop: 30,
-    background: "#EDBB18"
+    background: '#EDBB18'
   },
   menu: {
     width: 200
@@ -28,26 +32,36 @@ const useStyles = makeStyles(theme => ({
 
 function Register(props) {
   const classes = useStyles();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
   const register = async e => {
     e.preventDefault();
-    if (password1 !== password2) {
-      props.enqueueSnackbar("Inconsistent password", { variant: "error" });
+
+    if (!validateEmail(email)) {
+      props.enqueueSnackbar('bad email format', { variant: 'error' });
       return;
     }
+    if (password1 !== password2) {
+      props.enqueueSnackbar('Inconsistent password', { variant: 'error' });
+      return;
+    }
+    if (password1.length < 6) {
+      props.enqueueSnackbar('the length of password is at least 6', { variant: 'error' });
+      return;
+    }
+
     try {
-      const response = Axios.post("/api/register", {
-        name,
+      const { data } = await Axios.post('/api/register', {
+        username: name,
         email,
         password: password1
       });
-      if (response.errcode > 0) {
-        props.enqueueSnackbar(response.errmsg, { variant: "error" });
+      if (data.errcode > 0) {
+        props.enqueueSnackbar(data.errmsg, { variant: 'error' });
       } else {
-        props.history.push("/login");
+        props.history.push('/passport/login');
       }
     } catch (error) {
       console.error(error);
@@ -61,7 +75,7 @@ function Register(props) {
           Create your account
         </Typography>
       </Grid>
-      <Grid item style={{ alignSelf: "flex-end" }}>
+      <Grid item style={{ alignSelf: 'flex-end' }}>
         <Button component={Link} to="/passport/login" variant="contained" color="primary" size="small">
           Login
         </Button>
@@ -93,6 +107,7 @@ function Register(props) {
             value={password1}
             onChange={e => setPassword1(e.target.value)}
             margin="normal"
+            type="password"
             required
           />
           <TextField
@@ -112,9 +127,8 @@ function Register(props) {
             color="secondary"
             aria-label="Login"
             className={classes.login}
-            type="submit"
-          >
-            <span style={{ margin: "0 30px" }}>Login</span>
+            type="submit">
+            <span style={{ margin: '0 30px' }}>Login</span>
           </Fab>
         </form>
       </Grid>
@@ -122,4 +136,4 @@ function Register(props) {
   );
 }
 
-export default withSnackbar(Register);
+export default withRouter(withSnackbar(Register));

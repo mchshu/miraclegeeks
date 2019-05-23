@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button, TextField, Fab } from "@material-ui/core";
-import Axios from "axios";
-import { withSnackbar } from "notistack";
+import React, { useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Button, TextField, Fab } from '@material-ui/core';
+import Axios from 'axios';
+import { withSnackbar } from 'notistack';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   login: {
     marginTop: 30,
-    background: "#EDBB18"
+    background: '#EDBB18'
   },
   menu: {
     width: 200
@@ -28,20 +28,18 @@ const useStyles = makeStyles(theme => ({
 
 function Login(props) {
   const classes = useStyles();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const login = async e => {
     e.preventDefault();
     try {
-      const response = Axios.post("/api/login", {
-        email,
-        password
-      });
-      if (response.errcode > 0) {
-        localStorage.setItem("username", response.username);
-        props.history.push("/project");
+      const { data } = await Axios.post('/api/login', { email, password });
+
+      if (data.errcode && data.errcode > 0) {
+        props.enqueueSnackbar('username or password is invalid!', { variant: 'error' });
       } else {
-        props.enqueueSnackbar("username or password is invalid!", { variant: "error" });
+        props.setUsername(data.username);
+        props.history.push('/project');
       }
     } catch (error) {
       console.error(error);
@@ -55,7 +53,7 @@ function Login(props) {
           Welcome！
         </Typography>
       </Grid>
-      <Grid item style={{ alignSelf: "flex-end" }}>
+      <Grid item style={{ alignSelf: 'flex-end' }}>
         <Button component={Link} to="/passport/register" variant="contained" color="primary" size="small">
           Register
         </Button>
@@ -81,6 +79,7 @@ function Login(props) {
             value={password}
             onChange={e => setPassword(e.target.value)}
             margin="normal"
+            type="password"
             required
           />
           <Fab
@@ -89,9 +88,8 @@ function Login(props) {
             color="secondary"
             aria-label="Login"
             className={classes.login}
-            type="submit"
-          >
-            <span style={{ margin: "0 30px" }}>Login</span>
+            type="submit">
+            <span style={{ margin: '0 30px' }}>Login</span>
           </Fab>
         </form>
       </Grid>
