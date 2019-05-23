@@ -17,6 +17,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     backgroundColor: theme.palette.background.paper
   },
+  item: {
+    '&:hover': {
+      boxShadow: '0px 0px 14px 0px rgba(198,215,234,1)'
+    }
+  },
   bigAvatar: {
     margin: "0 20px",
     width: 90,
@@ -65,7 +70,7 @@ function Enterprise(props) {
         {projects.map(project => {
           return (
             <React.Fragment key={project.id}>
-              <ListItem alignItems="flex-start">
+              <ListItem alignItems="flex-start" className={classes.item}>
                 <ListItemAvatar>
                   <Avatar alt={project.name} src={project.avatar} className={classes.bigAvatar} />
                 </ListItemAvatar>
@@ -97,7 +102,6 @@ function Enterprise(props) {
                   </Grid>
                 </Grid>
               </ListItem>
-              <Divider />
             </React.Fragment>
           );
         })}

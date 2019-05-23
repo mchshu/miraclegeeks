@@ -18,8 +18,8 @@ function PublicRouter(props) {
 
   return (
     <>
+      <img src={banner} alt="banner" width="100%" />
       <Container fixed>
-        <img src={banner} alt="banner" width="100%" />
         <Route path="/" exact component={Project} />
         <Route path="/project" component={Project} />
         <Route path="/company" component={Company} />
@@ -34,18 +34,17 @@ const PageRouter = withRouter(props => {
   const passport = props.location.pathname.startsWith('/passport');
   const enterprise = props.location.pathname.startsWith('/enterprise');
   const [username, setUsername] = React.useState(() => {
-    return localStorage.getItem("username");
+    return localStorage.getItem('username');
   });
 
   const updateUsername = username => {
     if (username) {
-      localStorage.setItem("username", username)
+      localStorage.setItem('username', username);
     } else {
-      localStorage.removeItem("username");
-
+      localStorage.removeItem('username');
     }
     setUsername(username);
-  }
+  };
 
   //logo.png
   return (

@@ -128,7 +128,7 @@ function Register(props) {
             aria-label="Login"
             className={classes.login}
             type="submit">
-            <span style={{ margin: '0 30px' }}>Login</span>
+            <span style={{ margin: '0 30px' }}>Register</span>
           </Fab>
         </form>
       </Grid>

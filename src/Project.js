@@ -101,7 +101,6 @@ function Project(props) {
                   </Grid>
                 </Grid>
               </ListItem>
-              <Divider />
             </React.Fragment>
           );
         })}

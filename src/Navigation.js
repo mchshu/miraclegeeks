@@ -87,9 +87,11 @@ function Navigation(props) {
           <Grid item>{props.enterprise ? <Enterprise /> : <Normal />}</Grid>
         </Grid>
         <Grid item container xs alignItems="center" direction="row-reverse" className={classes.right}>
-          <Grid item component={Link} to="/enterprise" height={20} className={classes.enterprise}>
-            <img src="/images/enterprise.svg" height="100%" alt="enterprise" />
-          </Grid>
+          {!props.enterprise && (
+            <Grid item component={Link} to="/enterprise" height={20} className={classes.enterprise}>
+              <img src="/images/enterprise.svg" height="100%" alt="enterprise" />
+            </Grid>
+          )}
           <Grid item>
             <AuthInfo username={username} setUsername={setUsername} />
           </Grid>
