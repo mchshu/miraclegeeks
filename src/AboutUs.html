@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+<title>Project Detail</title>
+<meta
+  name="viewport"
+  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="C:\Users\lychl\Desktop\pages\new.css">
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body>
+<div class="menu">
+<ul class="ty-menu__items">
+<li class="ty-menu__item"><a href="http://47.99.246.147:3100"><img src="images\logo_footer.png" alt="logo"></a></li>
+  <li class="ty-menu__item"><a href="AboutUs.html">ABOUT US</a></li>
+  <li class="ty-menu__item"><a href="Company.html">COMPANY</a></li>
+  <li class="ty-menu__item"><a href="University.html">UNIVERSITY</a></li> 
+  <li class="ty-menu__item"><a href="ContactUs.html">CONTACT US</a></li>
+  <li class="ty-menu__item dropdown navbar">
+  <button onclick="myFunction()" class="dropbtn ty-menu__item">PROJECT DETAIL</button>
+  <span id="myDropdown" class="dropdown-content">
+    <a class="navbar" href="ProjectDetail.html">PROJECT DETAIL</a>
+    <a class="navbar" href="currentProject.html">CURRENT PROJECT</a>
+    <a class="navbar" href="PastProject.html">PAST PROJECT</a>
+	<a class="navbar" href="cv.html">PERSONAL INFO</a>
+  </span></li>
+</ul></div>
+<div id="logo"><img src="images\banner.png" alt="banner"></div>
+
+<div class="welcome text-center"><h1>Welcome to our site</h1></div>
+<div class="element text-center" style="margin-bottom:0">
+<h3>-&nbsp;Our Mission&nbsp;-</h3>
+  <p>To do our part to plan a better future, and more importantly, to help others move toward a higher technology and globalization era. </p> 
+</div>
+
+<div class="element text-center" style="margin-bottom:0">
+<h3>-&nbsp;Our Team&nbsp;-</h3></div>
+<div class="team">
+  <p><img src="images\smileface.png" alt="smileface">&nbsp;Jiali Lu</p> 
+  <p><img src="images\smileface.png" alt="smileface">&nbsp;Xiaoming Kang</p> 
+  <p><img src="images\smileface.png" alt="smileface">&nbsp;Yi-chao Chen</p> 
+  <p><img src="images\smileface.png" alt="smileface">&nbsp;Kai Liang</p> 
+</div>
+
+</br>
+<div class="jumbotron text-center" style="margin-bottom:0"><img src="images\logo_footer.png" alt="logo_footer">
+<br/><br/><p>Copyright &copy; 2019 search for project</p>
+</div>
+</body>
+</html>
+

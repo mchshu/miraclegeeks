@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+<title>Current Project</title>
+<meta
+  name="viewport"
+  content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="C:\Users\lychl\Desktop\pages\new.css">
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+function myFunctions() {
+  var x = document.getElementById("myFile");
+  x.disabled = true;
+}
+</script>
+</head>
+
+<body>
+<div class="menu">
+<ul class="ty-menu__items">
+<li class="ty-menu__item"><a href="http://47.99.246.147:3100"><img src="images\logo_footer.png" alt="logo"></a></li>
+  <li class="ty-menu__item"><a href="AboutUs.html">ABOUT US</a></li>
+  <li class="ty-menu__item"><a href="Company.html">COMPANY</a></li>
+  <li class="ty-menu__item"><a href="University.html">UNIVERSITY</a></li> 
+  <li class="ty-menu__item"><a href="ContactUs.html">CONTACT US</a></li>
+  <li class="ty-menu__item dropdown navbar">
+  <button onclick="myFunction()" class="dropbtn ty-menu__item">PROJECT DETAIL</button>
+  <span id="myDropdown" class="dropdown-content">
+    <a class="navbar" href="ProjectDetail.html">PROJECT DETAIL</a>
+    <a class="navbar" href="currentProject.html">CURRENT PROJECT</a>
+    <a class="navbar" href="PastProject.html">PAST PROJECT</a>
+	<a class="navbar" href="cv.html">PERSONAL INFO</a>
+  </span></li>
+</ul></div>
+<div><img src="images\banner.png" alt="banner"></div>
+<br/>
+
+<div class="text-center w3-text-pale-red"><h1><b>Current Project</b></h1></div>
+<div class="element"><h3>Project Title: <span class="w3-text-pink">Bloomber</span></h3></div>
+<div class="element"><h3>Company: <span class="w3-text-pink">Afterpay Touch Group Ltd</span></h3></div>
+<div class="element"><h3>Period: <span class="w3-text-pink">6 months</span></h3></div>
+
+<div class="element" style="margin-bottom:0">
+<h3 class="w3-text-pink">Project Brief</h3>
+<p>Afterpay Touch Group Limited provide payment services. The Company offers a platform for payment of goods, including apparel, shoes, automotive parts, watches, personal care, sports, arts, foods, beverages, and other products. Afterpay Touch Group serves customers in Australia.
+SECTOR</p>
+<p>The home page design should tie in with our main message, which is:</p>
+<p>Where people photography is concerned, a mixture of races and ages should be represented.</p>
+<p>This ties in with our major website objectives: </p>
+<ul><li>Afterpay Touch Group continues to assess geographic expansion opportunities for its Afterpay product</li>
+<li>Generate donations and merchandise sales</li>
+<li>Afterpay team, led by co-founder Nick Molnar, currently investigating opportunities to enter the United States market</li>
+<li>In support of this initiative, Afterpay Touch has entered into a strategic relationship and new share issuance transaction with US based Matrix Partners, a long-established, technologyfocused venture capital firm</li>
+<li>Matrix to invest US$15.0m (approximately A$18.9m) in Afterpay Touch - US$14.9m via a new share issuance at A$6.51 per share and US$100,000 via convertible note issuance from Afterpay US, Inc.</li>
+<li>Mr. Dana Stalder, a General Partner of Matrix, invited to join the Afterpay Touch Board</li>
+</ul>
+</div>
+
+<div class="element" style="margin-bottom:0">
+<h3 class="w3-text-pink">Progress status of this Project: </h3>
+<input width="800px" class="progress w3-btn w3-light-green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60%</input></div><br/>
+
+<div class="element"><h3 class="w3-text-pink">Provide supporting Documents</h3>
+<p>Please upload documents:</p>
+<input type="file" id="myFile"></div>
+
+<div class="element" style="margin-bottom:0">
+<h3 class="w3-text-pink">Progress of this Project: </h3>
+<input type="radio" name="gender" value="ongoing" readonly checked>&nbsp;&nbsp;Ongoing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="radio" name="gender" value="finished" readonly>&nbsp;&nbsp;Finished</div>
+
+<div class="element" style="margin-bottom:0">
+<form>
+<h3 class="w3-text-pink">Please leave a message:</h3>
+    <textarea class="nw_UserInputField" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type your message here'" maxlength="500" placeholder="Type your message here"></textarea>  
+
+<a id="sub" class="w3-button w3-text-white w3-indigo w3-border w3-border-white w3-round-xxlarge" href="mailto:lychlll19@gmail.com">Submit</a></div>
+</form>
+</div>
+  
+
+
+
+<br/>
+<div class="jumbotron text-center" style="margin-bottom:0"><img src="images\logo_footer.png" alt="logo_footer">
+<br/><br/><p>Copyright &copy; 2019 search for project</p>
+</div>
+</body>
+</html>
+
